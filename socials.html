@@ -6,12 +6,87 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Socials</title>
+    <style>
+        /* Additional CSS for the card */
+        .card {
+            box-shadow: #f4aa09c2 0 0 20px 0.5px;
+            border-radius: 20px;
+            width: 50%;
+            height: 100%;
+            margin: auto;
+            max-width: 500px;
+            padding: 20px;
+            text-align: center;
+            margin-top: 30px;
+            color: #071013;
+            animation: slideInFromLeft 1s ease-in-out;
+            perspective: 1000px; /* Add perspective for 3D effect */
+            background: linear-gradient(45deg, #F4E409, #EB5160); /* Gradient background */
+        }
+        
+        .card h2 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .card p {
+            font-size: 18px;
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .social-icons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            animation: slideInFromBottom 1s ease-in-out;
+        }
+
+        .social-icons a {
+            font-size: 24px;
+            color: #071013;
+            margin: 0 10px;
+            transition: color 0.5s, transform 0.5s;
+            transform-style: preserve-3d; /* Ensure 3D transformations on child elements */
+        }
+
+        .social-icons a:hover {
+            color: #EB5160;
+            transform: rotateY(20deg) scale(1.2); /* Add rotation on hover */
+        }
+
+        @keyframes slideInFromLeft {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInFromBottom {
+            0% {
+                transform: translateY(100%);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="topnav">
@@ -27,5 +102,104 @@
             <a href="portfolio.html">Portfolio</a>
         </div>
     </div>
+
+    <!-- Card section -->
+    <div class="card">
+        <h2>Moussi</h2>
+        <p>Designer</p>
+        <!-- Social Icons -->
+        <div class="social-icons">
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-instagram"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+            <a href="#"><i class="fa fa-youtube-play"></i></a>
+        </div>
+    </div>
+
+    <!-- JavaScript for mouse interaction -->
+    <script>
+        const card = document.querySelector('.card');
+        card.addEventListener('mousemove', (e) => {
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 10;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 10 ;
+            card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+        });
+        card.addEventListener('mouseenter', () => {
+            card.style.transition = 'none';
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.transition = 'all 0.5s ease';
+            card.style.transform = 'rotateY(0deg) rotateX(0deg)';
+        });
+    </script>
+        <style>
+            body {
+                margin: 0;
+                overflow: hidden;
+            }
+    
+            .eyes {
+                position: absolute;
+                width: 100px;
+                height: px;
+                border-radius: 50%;
+                background-color: white;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+                overflow: hidden;
+                pointer-events: none; /* Prevent the eyes from interfering with mouse events */
+            }
+    
+            .eye {
+                position: absolute;
+                width: 25px;
+                height: 25px;
+                background-color: #333;
+                border-radius: 50%;
+                left: 50%;
+                transform: translateX(-50%);
+                transition: transform 0.1s ease-in-out;
+            }
+    
+            .pupil {
+                position: absolute;
+                width: 10px;
+                height: 10px;
+                background-color: #000;
+                border-radius: 50%;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="eyes">
+            <div class="eye">
+                <div class="pupil"></div>
+            </div>
+            <div class="eye">
+                <div class="pupil"></div>
+            </div>
+        </div>
+    
+        <script>
+            const eyes = document.querySelector('.eyes');
+            const pupils = document.querySelectorAll('.pupil');
+    
+            document.addEventListener('mousemove', (e) => {
+                const { clientX: mouseX, clientY: mouseY } = e;
+                const { left: eyesX, top: eyesY, width: eyesWidth, height: eyesHeight } = eyes.getBoundingClientRect();
+                const centerX = eyesX + eyesWidth / 2;
+                const centerY = eyesY + eyesHeight / 2;
+    
+                const angle = Math.atan2(mouseY - centerY, mouseX - centerX);
+                const distance = Math.min(eyesWidth, eyesHeight) * 0.4;
+    
+                pupils.forEach((pupil) => {
+                    pupil.style.transform = `translate(-50%, -50%) translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px)`;
+                });
+            });
+        </script>
 </body>
 </html>
