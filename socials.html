@@ -183,23 +183,6 @@
             </div>
         </div>
     
-        <script>
-            const eyes = document.querySelector('.eyes');
-            const pupils = document.querySelectorAll('.pupil');
-    
-            document.addEventListener('mousemove', (e) => {
-                const { clientX: mouseX, clientY: mouseY } = e;
-                const { left: eyesX, top: eyesY, width: eyesWidth, height: eyesHeight } = eyes.getBoundingClientRect();
-                const centerX = eyesX + eyesWidth / 2;
-                const centerY = eyesY + eyesHeight / 2;
-    
-                const angle = Math.atan2(mouseY - centerY, mouseX - centerX);
-                const distance = Math.min(eyesWidth, eyesHeight) * 0.4;
-    
-                pupils.forEach((pupil) => {
-                    pupil.style.transform = `translate(-50%, -50%) translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px)`;
-                });
-            });
-        </script>
+
 </body>
 </html>
