@@ -21,21 +21,20 @@
     </div>
   
     <!-- Left-aligned links (default) -->
-    <a href="#news">Portfolio</a>
+    <a href="portfolio.html">Portfolio</a>
 
   
     <!-- Right-aligned links -->
     <div class="topnav-right">
   
-      <a href="#about">Socials</a>
+      <a href="socials.html">Socials</a>
     </div>
   
 </div>
 
 <!-- The form (centered) -->
 <form class="example" action="action_page.php">
-  <input type="text" placeholder="" name="search">
-  <button type="submit"><i class="fa fa-search"></i></button>
+  <input type="text" placeholder="Search..." name="search">
 </form>
 
 <div class="widget-container">
@@ -51,6 +50,7 @@
         <p class="title">Dark Secrets</p>
         <p class="description">I love biegn differnt and I added this widget just without any reason just to get your attention if you are reading this it means that I attracted you eyes . That's a proof that i am not just playing here </p>
     </div>
+    
 </div>
 <h1 class="mct">Some of my MC thumbnails</h1>
 
@@ -122,6 +122,31 @@ function showSlides(n) {
   dots[slideIndex-1].className += " active";
 }
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const searchInput = document.querySelector('input[name="search"]');
+    const widgets = document.querySelectorAll('.widget');
+
+    searchInput.addEventListener('input', function() {
+        const searchTerm = this.value.trim().toLowerCase();
+
+        widgets.forEach(widget => {
+            const widgetTitle = widget.querySelector('.title').textContent.toLowerCase();
+            const widgetDescription = widget.querySelector('.description').textContent.toLowerCase();
+
+            if (widgetTitle.includes(searchTerm) || widgetDescription.includes(searchTerm)) {
+                widget.style.display = 'block';
+            } else {
+                widget.style.display = 'none';
+            }
+        });
+    });
+});
+
+
+</script>
+
+
 
   <footer>
     <hr>
